@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI SMS Spam Detector</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#050816;
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+background:
+radial-gradient(circle,#00ffff22 2px,transparent 2px);
+background-size:40px 40px;
+animation:move 20s linear infinite;
+}
+
+@keyframes move{
+from{transform:translateY(0);}
+to{transform:translateY(-500px);}
+}
+
+.container{
+width:95%;
+max-width:1200px;
+min-height:750px;
+
+padding:50px;
+
+border-radius:30px;
+
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(0,255,255,0.3);
+
+box-shadow:
+0 0 20px rgba(0,255,255,0.3),
+0 0 40px rgba(0,255,255,0.15);
+
+position:relative;
+z-index:10;
+}
+
+h1{
+text-align:center;
+font-size:56px;
+color:#00ffff;
+
+text-shadow:
+0 0 10px #00ffff,
+0 0 20px #00ffff,
+0 0 40px #00ffff;
+}
+
+.subtitle{
+text-align:center;
+margin-top:10px;
+margin-bottom:30px;
+color:#cbd5e1;
+font-size:18px;
+}
+
+textarea{
+width:100%;
+height:280px;
+padding:25px;
+font-size:18px;
+
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.1);
+
+border-radius:15px;
+outline:none;
+resize:none;
+
+color:white;
+}
+
+textarea::placeholder{
+color:#94a3b8;
+}
+
+button{
+width:100%;
+margin-top:25px;
+
+padding:18px;
+
+border:none;
+border-radius:15px;
+
+font-size:20px;
+font-weight:700;
+
+cursor:pointer;
+
+background:#00ffff;
+color:black;
+
+transition:.3s;
+
+box-shadow:
+0 0 15px #00ffff,
+0 0 30px #00ffff;
+}
+
+button:hover{
+transform:scale(1.02);
+
+box-shadow:
+0 0 25px #00ffff,
+0 0 50px #00ffff;
+}
+
+.result{
+margin-top:30px;
+padding:30px;
+border-radius:20px;
+
+text-align:center;
+
+font-size:36px;
+font-weight:700;
+}
+
+.spam{
+color:#ff4d4d;
+border:2px solid #ff4d4d;
+box-shadow:0 0 25px #ff4d4d;
+}
+
+.ham{
+color:#00ff88;
+border:2px solid #00ff88;
+box-shadow:0 0 25px #00ff88;
+}
+
+.confidence{
+margin-top:15px;
+font-size:24px;
+color:white;
+}
+
+.cards{
+margin-top:40px;
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+
+gap:20px;
+}
+
+.card{
+padding:35px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,0.05);
+
+text-align:center;
+color:white;
+
+font-size:18px;
+
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+
+.footer{
+margin-top:40px;
+text-align:center;
+color:#94a3b8;
+font-size:16px;
+}
+
+@media(max-width:768px){
+
+.container{
+padding:25px;
+}
+
+.cards{
+grid-template-columns:1fr;
+}
+
+h1{
+font-size:34px;
+}
+
+textarea{
+height:220px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 AI SMS Spam Detector</h1>
+
+<p class="subtitle">
+Machine Learning + NLP Powered Threat Detection System
+</p>
+
+<form action="/predict" method="POST">
+
+<textarea
+name="message"
+placeholder="Paste SMS message here..."
+required>{{ message if message else '' }}</textarea>
+
+<button type="submit">
+🚀 Analyze Message
+</button>
+
+</form>
+
+{% if prediction %}
+
+<div class="result {{ result_class }}">
+{{ prediction }}
+
+<div class="confidence">
+Confidence Score : {{ confidence }}%
+</div>
+
+</div>
+
+{% endif %}
+
+<div class="cards">
+
+<div class="card">
+⚡ Fast Prediction
+</div>
+
+<div class="card">
+🧠 NLP Processing
+</div>
+
+<div class="card">
+🔒 Secure Detection
+</div>
+
+</div>
+
+<div class="footer">
+Made by Akshat Goyal • Machine Learning Portfolio Project
+</div>
+
+</div>
+
+</body>
+</html>
